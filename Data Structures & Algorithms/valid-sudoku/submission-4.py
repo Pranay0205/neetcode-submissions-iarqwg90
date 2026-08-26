@@ -1,0 +1,39 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        
+        # iterate over a row and create a rowset to check the duplicates
+        for row in range(9):
+            rowSet = set()
+            for col in range(9):
+                if board[row][col] == ".":
+                    continue
+                if board[row][col] in rowSet:
+                    return False
+                rowSet.add(board[row][col])
+                    
+
+        for col in range(9):
+            colSet = set()
+            for row in range(9):
+                if board[row][col] == ".":
+                    continue
+                if board[row][col] in colSet:
+                    return False
+                colSet.add(board[row][col])
+
+        for square in range(9):
+            squareSet = set()
+            for i in range(3):
+                for j in range(3):
+                    row = (square // 3) * 3 + i
+                    col = (square % 3) * 3 + j
+                    if board[row][col] == ".":
+                        continue
+                    if board[row][col] in squareSet:
+                        return False
+                    squareSet.add(board[row][col])
+
+        return True
+                        
+                    
+        
